@@ -7,7 +7,7 @@ public class Film {
 	private String title;
 	private String description;
 	private int releaseYear;
-	private int languageID;
+	private String language;
 	private int rentalDuration;
 	private double rentalRate;
 	private int length;
@@ -16,12 +16,26 @@ public class Film {
 	private String specialFeatures;
 	private List<Actor> actors;
 
-	@Override
-	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
-				+ ", languageID=" + languageID + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
-				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
-				+ ", specialFeatures=" + specialFeatures + "]";
+	public Film() {
+
+	}
+
+	public Film(int id, String title, String description, int releaseYear, String language, int rentalDuration,
+			double rentalRate, int length, double replacementCost, String rating, String specialFeatures,
+			List<Actor> actors) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.releaseYear = releaseYear;
+		this.language = language;
+		this.rentalDuration = rentalDuration;
+		this.rentalRate = rentalRate;
+		this.length = length;
+		this.replacementCost = replacementCost;
+		this.rating = rating;
+		this.specialFeatures = specialFeatures;
+		this.actors = actors;
 	}
 
 	public int getId() {
@@ -56,12 +70,12 @@ public class Film {
 		this.releaseYear = releaseYear;
 	}
 
-	public int getLanguageID() {
-		return languageID;
+	public String getLanguage() {
+		return language;
 	}
 
-	public void setLanguageID(int languageID) {
-		this.languageID = languageID;
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	public int getRentalDuration() {
@@ -124,9 +138,10 @@ public class Film {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((actors == null) ? 0 : actors.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
-		result = prime * result + languageID;
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
 		result = prime * result + length;
 		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
 		result = prime * result + releaseYear;
@@ -150,6 +165,11 @@ public class Film {
 		if (getClass() != obj.getClass())
 			return false;
 		Film other = (Film) obj;
+		if (actors == null) {
+			if (other.actors != null)
+				return false;
+		} else if (!actors.equals(other.actors))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -157,7 +177,10 @@ public class Film {
 			return false;
 		if (id != other.id)
 			return false;
-		if (languageID != other.languageID)
+		if (language == null) {
+			if (other.language != null)
+				return false;
+		} else if (!language.equals(other.language))
 			return false;
 		if (length != other.length)
 			return false;
@@ -185,6 +208,37 @@ public class Film {
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Film [id=");
+		builder.append(id);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", releaseYear=");
+		builder.append(releaseYear);
+		builder.append(", language=");
+		builder.append(language);
+		builder.append(", rentalDuration=");
+		builder.append(rentalDuration);
+		builder.append(", rentalRate=");
+		builder.append(rentalRate);
+		builder.append(", length=");
+		builder.append(length);
+		builder.append(", replacementCost=");
+		builder.append(replacementCost);
+		builder.append(", rating=");
+		builder.append(rating);
+		builder.append(", specialFeatures=");
+		builder.append(specialFeatures);
+		builder.append(", actors=");
+		builder.append(actors);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }
