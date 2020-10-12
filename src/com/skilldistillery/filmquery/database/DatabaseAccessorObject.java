@@ -158,11 +158,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	@Override
 	public List<Film> findFilmsByKeyword(String keyword) {
 		List<Film> films = new ArrayList<Film>();
-		String sql = "SELECT film.* from film WHERE title LIKE ? ";
+		String sql = "SELECT film.*, language.name FROM film JOIN language ON film.language_id = "
+				+ "language.id WHERE film.title LIKE ? OR film.description LIKE ?";
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, keyword);
+			stmt.setString(1, "%" + keyword + "%");
+			stmt.setString(2, "%" + keyword + "%");
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Film film = new Film();
@@ -177,6 +179,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacementCost(rs.getDouble("replacement_cost"));
 				film.setRating(rs.getString("rating"));
 				film.setSpecialFeatures(rs.getString("special_features"));
+				film.setActors(findActorsByFilmId(rs.getInt("id")));
 
 				films.add(film);
 			}
