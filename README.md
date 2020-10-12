@@ -1,4 +1,4 @@
-### Film Query Project
+# Film Query Project
 This app lets you sort through all of the film information we have on file. If you have the film id, Great! We can help you find the movie you're looking for, and all of the actors in that film. If you can only remember a keyword for the movie, that's fine too. We can help you find that movie, and maybe more that you may be interested in!
 ## Topics
 * ORM(Object-RelationalMapping)
